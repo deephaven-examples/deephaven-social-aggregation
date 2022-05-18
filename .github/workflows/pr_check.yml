@@ -19,7 +19,7 @@ jobs:
           echo "$GOOGLE_KEY" > secrets/google-key.json
         env:
           GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
-      - run: . ./cron.sh
+      - run: . ./cron.sh python
         env:
           DAYS_OFFSET: 0 #This will do a dummy run that builds the tables without any data
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
