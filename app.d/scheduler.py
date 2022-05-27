@@ -23,7 +23,7 @@ else:
     date_increment = to_period("1D")
 
     ###Google
-    if bool(os.environ.get("ENABLE_GA"), False):
+    if bool(os.environ.get("ENABLE_GA", False)):
         dimension_collectors = [
             DimensionCollector(expression="ga:pagePath", metric_column_name="PagePath"),
             DimensionCollector(expression="ga:sourceMedium", metric_column_name="SourceMedium")
@@ -49,7 +49,7 @@ else:
             globals()[f"ga_table{i}"] = ga_tables[i]
 
     ###Twitter
-    if bool(os.environ.get("ENABLE_TWITTER"), False):
+    if bool(os.environ.get("ENABLE_TWITTER", False)):
         analytics_types = [
             ("CAMPAIGN", "Campaign", get_campaigns, analytics_out_of_range),
             ("LINE_ITEM", "AdGroup", get_line_items, analytics_out_of_range),
@@ -63,5 +63,5 @@ else:
         twitter_metadata = twitter_collector.twitter_analytics_metadata()
 
     ###Slack
-    if bool(os.environ.get("ENABLE_SLACK"), False):
+    if bool(os.environ.get("ENABLE_SLACK", False)):
         (slack_channels, slack_messages) = get_all_slack_messages(start_time=start_date, end_time=end_date)
