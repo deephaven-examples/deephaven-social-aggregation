@@ -17,6 +17,9 @@ services:
       - SLACK_API_TOKEN=${SLACK_API_TOKEN}
       - DAYS_OFFSET=${DAYS_OFFSET}
       - SCHEDULED=${SCHEDULED}
+      - ENABLE_GA=${ENABLE_GA}
+      - ENABLE_TWITTER=${ENABLE_TWITTER}
+      - ENABLE_SLACK=${ENABLE_SLACK}
 
   web:
     image: ghcr.io/deephaven/web:${VERSION:-latest}
