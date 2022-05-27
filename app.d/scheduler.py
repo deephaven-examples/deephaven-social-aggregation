@@ -9,7 +9,10 @@ from deephaven.time import now, lower_bin, minus_nanos, TimeZone
 
 import os
 
-if not bool(os.environ.get("SCHEDULED", False)):
+def bool_converter(strn):
+    return strn.lower() == "true"
+
+if not bool_converter(os.environ.get("SCHEDULED", "false")):
     print("SCHEDULED needs to be set to \"true\" to run the scheduler. Skipping the scheduler...")
 else:
     ONE_DAY_NANOS = 86400000000000
@@ -23,7 +26,7 @@ else:
     date_increment = to_period("1D")
 
     ###Google
-    if bool(os.environ.get("ENABLE_GA", False)):
+    if bool_converter(os.environ.get("ENABLE_GA", "false")):
         dimension_collectors = [
             DimensionCollector(expression="ga:pagePath", metric_column_name="PagePath"),
             DimensionCollector(expression="ga:sourceMedium", metric_column_name="SourceMedium")
@@ -49,7 +52,7 @@ else:
             globals()[f"ga_table{i}"] = ga_tables[i]
 
     ###Twitter
-    if bool(os.environ.get("ENABLE_TWITTER", False)):
+    if bool_converter(os.environ.get("ENABLE_TWITTER", "false")):
         analytics_types = [
             ("CAMPAIGN", "Campaign", get_campaigns, analytics_out_of_range),
             ("LINE_ITEM", "AdGroup", get_line_items, analytics_out_of_range),
@@ -63,5 +66,5 @@ else:
         twitter_metadata = twitter_collector.twitter_analytics_metadata()
 
     ###Slack
-    if bool(os.environ.get("ENABLE_SLACK", False)):
+    if bool_converter(os.environ.get("ENABLE_SLACK", "false")):
         (slack_channels, slack_messages) = get_all_slack_messages(start_time=start_date, end_time=end_date)
