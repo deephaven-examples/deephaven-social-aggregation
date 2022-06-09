@@ -157,9 +157,17 @@ write_tables(tables, path="/data/test-1/")
 
 The `./app.d/scheduler.py` file contains a script that can be run on a scheduled basis. The default configuration pulls from the current time floored to 3 am (EST) to 24 hours before. The `DAYS_OFFSET` environmental variable can be set to an integer to support offsets of multiple days.
 
-The scheduler simply pulls from all of the data sources (Google, Twitter, etc.) and writes them to Parquet files. The files are written to the `/data/<start_date>/` directory.
+The scheduler simply pulls from all of the configured data sources (Google, Twitter, etc.) and writes them to Parquet files. The files are written to the `/data/<start_date>/` directory.
 
 The environmental variable `SCHEDULED` needs to be set to `true` for the scheduler to run.
+
+The following environmental variables can be set to `true` or `false` to flag what sources data is collected from. `ENABLE_GA` enables collecting data from Google Analytics, `ENABLE_TWITTER` enables collecting data from Twitter, and `ENABLE_SLACK` enables collecting data from Slack.
+
+```
+ENABLE_GA
+ENABLE_TWITTER
+ENABLE_SLACK
+```
 
 ## Github Actions configuration
 
@@ -175,6 +183,9 @@ TWITTER_ACCESS_TOKEN
 TWITTER_ACCESS_TOKEN_SECRET
 SLACK_API_TOKEN
 SCHEDULED
+ENABLE_GA
+ENABLE_TWITTER
+ENABLE_SLACK
 ```
 
-`GOOGLE_KEY` should be the file contents of the `./secrets/google-key.json` file, `SCHEDULED` should be set to `true`, and the rest of them should be the same values used to run the project.
+`GOOGLE_KEY` should be the file contents of the `./secrets/google-key.json` file, `SCHEDULED`, `ENABLE_GA`, `ENABLE_TWITTER`, and `ENABLE_SLACK` should be set to `true`, and the rest of them should be the same values used to run the project.

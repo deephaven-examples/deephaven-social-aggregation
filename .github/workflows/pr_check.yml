@@ -25,6 +25,9 @@ jobs:
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           SCHEDULED: true
+          ENABLE_GA: true
+          ENABLE_TWITTER: true
+          ENABLE_SLACK: true
       - name: Validate presence of tables
         uses: deephaven/action-assert-dh-tables-present@v1.1.0
         with:
