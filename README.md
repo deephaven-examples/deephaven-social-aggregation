@@ -189,3 +189,7 @@ ENABLE_SLACK
 ```
 
 `GOOGLE_KEY` should be the file contents of the `./secrets/google-key.json` file, `SCHEDULED`, `ENABLE_GA`, `ENABLE_TWITTER`, and `ENABLE_SLACK` should be set to `true`, and the rest of them should be the same values used to run the project.
+
+## Note
+
+The code in this repository is built for Deephaven Community Core v0.13.0. No guarantee of forwards or backwards compatibility is given.
