@@ -1,4 +1,4 @@
-FROM ghcr.io/deephaven/server
+FROM ghcr.io/deephaven/server:0.13.0
 
 COPY app.d /app.d
 COPY secrets/google-key.json /google-key.json
